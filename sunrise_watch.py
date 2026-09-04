@@ -17,7 +17,7 @@ import urllib.request
 from bs4 import BeautifulSoup
  
 # ---- 設定 ----------------------------------------------------------------
-CHECKER_URL = "https://sunrise-checker.com/seto_down.html"
+CHECKER_URL = "https://sunrise-checker.com/table_down_seto.html"
 KANKO_URL = "https://ressha-kanko.com/train/sunrise"
 KANKO_LABEL = "サンライズ瀬戸 下り"
  
