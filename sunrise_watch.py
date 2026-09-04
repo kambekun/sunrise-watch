@@ -1,5 +1,3 @@
-
-Sunrise watch · PY
 #!/usr/bin/env python3
 """
 サンライズ瀬戸（下り・東京→高松）9月26日の空席監視。
