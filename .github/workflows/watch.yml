@@ -1,0 +1,41 @@
+name: sunrise-watch
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # 15分おき（UTC基準だが間隔なので影響なし）
+  workflow_dispatch:          # 手動実行用ボタン
+
+permissions:
+  contents: write             # state.json を書き戻すために必要
+
+concurrency:
+  group: sunrise-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install beautifulsoup4
+
+      - name: 空席チェック
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          CONTACT: ${{ secrets.CONTACT }}
+          TARGET_DATE: "9/26"
+        run: python sunrise_watch.py
+        continue-on-error: true
+
+      - name: 状態を保存
+        run: |
+          git config user.name "sunrise-watch"
+          git config user.email "actions@github.com"
+          git add state.json
+          git diff --staged --quiet || git commit -m "state: $(date -u +%F\ %T)"
+          git push
