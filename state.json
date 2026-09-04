@@ -1,3 +1,9 @@
 {
-  "checker_failed": true
+  "checker_failed": false,
+  "checker": {
+    "ノビノビ座席": "×",
+    "シングル": "×",
+    "ソロ": "×"
+  },
+  "checker_updated": "2026年09月04日18:35"
 }
